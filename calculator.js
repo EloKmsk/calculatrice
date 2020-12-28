@@ -1,17 +1,22 @@
 'use strict';
 class Calculator {
-    afficher() {
-
+    afficher(val) {
+        document.getElementById("view").value+=val 
     }
 
     calculer() {
-
+        let a = document.getElementById("view").value 
+        let b = eval(a) 
+        document.getElementById("view").value = b 
     }
 
     effacer() {
-
+        document.getElementById("view").value = "" 
     }
+
+
     constructor() {
+        
 
         /* Déclaration d'éléments */
         const buttonPlus = document.createElement('button');
@@ -77,7 +82,9 @@ class Calculator {
         line4.id = "line4";
         const lines = document.createElement('div');
         lines.id = "lines";
-        const view = document.createElement('h1');
+        const view = document.createElement('input');
+        view.id = "view";
+        view.value= "";
         const body = document.querySelector('body');
 
         /* Positions de mes éléments et classes sans boucle*/
@@ -113,12 +120,10 @@ class Calculator {
         /* H1 */
         container.prepend(view);
 
-        /* Contenu des éléments */
-        const text = document.createTextNode('');
-        view.appendChild(text);
+
 
         /* Evenements au clique */
-        const buttons = document.querySelector('#operators, #numbers');
+        const buttons = document.querySelector('#numbers, #operators');
         buttons.addEventListener('click', afficher());
         const effacer = document.querySelector('#efface');
         effacer.addEventListener('click', effacer());
