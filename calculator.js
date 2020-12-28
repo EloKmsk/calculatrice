@@ -5,8 +5,8 @@ class Calculator {
     }
 
     calculer() {
-        let a = document.getElementById("view").value 
-        let b = eval(a) 
+        const a = document.getElementById("view").value 
+        const b = eval(a) 
         document.getElementById("view").value = b 
     }
 
