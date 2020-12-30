@@ -1,19 +1,5 @@
 'use strict';
 class Calculator {
-    afficher(val) {
-        document.getElementById("view").value+=val 
-    }
-
-    calculer() {
-        const a = document.getElementById("view").value 
-        const b = eval(a) 
-        document.getElementById("view").value = b 
-    }
-
-    effacer() {
-        document.getElementById("view").value = "" 
-    }
-
 
     constructor() {
         
@@ -82,9 +68,8 @@ class Calculator {
         line4.id = "line4";
         const lines = document.createElement('div');
         lines.id = "lines";
-        const view = document.createElement('input');
+        const view = document.createElement('div');
         view.id = "view";
-        view.value= "";
         const body = document.querySelector('body');
 
         /* Positions de mes éléments et classes sans boucle*/
@@ -117,20 +102,29 @@ class Calculator {
         /* Boutons line4 */
         line4.prepend(buttonResult);
         line4.prepend(buttonDivide);
-        /* H1 */
+        /* Affichage */
         container.prepend(view);
 
-
-
-        /* Evenements au clique */
-        const buttons = document.querySelector('#numbers, #operators');
-        buttons.addEventListener('click', afficher());
-        const effacer = document.querySelector('#efface');
-        effacer.addEventListener('click', effacer());
-        const resultat = document.querySelector('#result');
-        resultat.addEventListener('click', calculer());
-
+        document.addEventListener("DOMContentLoaded", function() {
+            const screenDisplay = document.getElementById('view');
+            const spans = document.querySelectorAll('button');
+            const spanArray = Array.from(spans);
+            document.querySelectorAll('#operators')[1].innerText = '-';
+            document.querySelectorAll('#operators')[2].innerText = '*';
+    
+            spanArray.map(button => button.addEventListener('click', function() {
+                if (button.innerText !== "=") {
+                    screenDisplay.innerText += button.innerText
+                };
+                if (button.innerText === "=") {
+                    screenDisplay.innerText = eval(screenDisplay.innerText)
+                };
+                if (button.innerText === "AC") {
+                    screenDisplay.innerText = ""
+                };
+            }));
+        });
     }
 }
 
-let calc1 = new Calculator();
+export default Calculator;
